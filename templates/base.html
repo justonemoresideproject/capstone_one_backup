@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} Base {% endblock %}</title>
+
+    <script src="/static/base.js"></script>
+    <script src="https://unpkg.com/jquery"></script>
+    <script src="https://unpkg.com/popper"></script>
+    <script src="https://unpkg.com/bootstrap"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    {% block scripts %} 
+    
+    {% endblock %}
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+    <link rel="stylesheet" href="/static/base.css">
+</head>
+<body>
+  <div class="userId" id="{{g.user.id}}"></div>
+    <nav class="navbar navbar-expand">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a href="/" class="navbar-brand">
+              <span class="title">Worldly</span>
+            </a>
+          </div>
+          <ul class="nav navbar-nav navbar-right">
+
+            {% if not g.user %}
+            <li>
+              <button id="signup" class="btn">
+                <a href="/signup" class="navAnchor">
+                  Sign up
+                </a>
+              </button>
+            </li>
+            <span class="seperator">|</span>
+            <li>
+              <button id="login" class="btn">
+                <a href="/login" class="navAnchor">
+                  Log in
+                </a>
+              </button>
+            </li>
+            {% else %}
+            <li>
+              <button id="myBoard" class="btn">
+                My Board
+              </button>
+            </li>
+            <li>
+              <button id="destFeed" class="btn">
+                Find Destinations
+              </button>
+            </li>
+            <li>
+              <button id="logout" class="btn">
+                Log out
+              </button>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </nav>
+      <div class="container">
+      <div class="contentContainer">
+        {% block content %} 
+
+        {% endblock %}
+        {% for category, message in get_flashed_messages(with_categories=True) %}
+        <div class="alert alert-{{ category }}">
+          {{ message }}
+        </div>
+      {% endfor %}
+      </div>
+    </div>
+</body>
+</html>

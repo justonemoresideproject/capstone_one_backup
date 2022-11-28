@@ -1,0 +1,26 @@
+{% extends 'base.html' %} 
+
+{% block title %} Destination Info {% endblock %}
+
+{% block scripts %}
+
+<link rel="stylesheet" href="/static/dest.css">
+<script src="/static/dest.js"></script>
+
+{% endblock %}
+
+{% block content %} 
+
+<div id='destInfoContainer' class="background-object">
+
+    <h1 id="countryName">{{country.name.common}}</h1>
+
+    <h3>Capital: {{country.capital[0]}}</h3>
+    <h3>Region: {{country.region}}</h3>
+    <h3>Subregion: {{country.subregion}}</h3>
+    <h3>Population: {{country.population}}</h3>
+
+    <p>{{html|safe}}</p>
+
+</div>
+{% endblock %}
